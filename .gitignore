@@ -11,10 +11,10 @@
 *.db-wal
 *.db-shm
 
-# Binaries
-server
-server.exe
-*.exe
+# Binaries (root only, don't ignore cmd/server directory)
+/server
+/server.exe
+/*.exe
 
 # Environment variables
 .env

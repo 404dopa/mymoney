@@ -8,24 +8,23 @@ RUN npm run build
 
 # Stage 2: Build Go Backend
 FROM golang:1.22-alpine AS backend-builder
-WORKDIR /app/backend
-COPY backend/go.mod backend/go.sum ./
-RUN go mod download
-COPY backend/ ./
-RUN CGO_ENABLED=0 GOOS=linux go build -o /app/server ./cmd/server
+WORKDIR /app
+COPY backend/go.mod backend/go.sum ./backend/
+RUN cd backend && go mod download
+COPY backend/ ./backend/
+RUN cd backend && CGO_ENABLED=0 GOOS=linux go build -o /app/server ./cmd/server
 
 # Stage 3: Production Image
 FROM alpine:3.19
 RUN apk add --no-cache ca-certificates tzdata
 WORKDIR /app
 
-# Copy binary from backend-builder
+# Copy compiled backend binary
 COPY --from=backend-builder /app/server /app/server
 
-# Copy built frontend assets to /app/frontend/dist
+# Copy built frontend static assets
 COPY --from=frontend-builder /app/frontend/dist /app/frontend/dist
 
-# Railway injects $PORT environment variable dynamically
 ENV PORT=8095
 EXPOSE 8095
 

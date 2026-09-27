@@ -26,8 +26,7 @@ export const SettingsModal: React.FC = () => {
   const currentMonthStr = getCurrentMonthString();
   const previewRange = calculateMonthDateRange(
     currentMonthStr,
-    tempDay || 1,
-    'same_day'
+    tempDay || 1
   );
 
   const handleSave = (e: React.FormEvent) => {

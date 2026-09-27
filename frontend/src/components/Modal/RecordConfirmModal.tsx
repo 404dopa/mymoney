@@ -15,9 +15,9 @@ export interface RecordConfirmModalProps {
 export const RecordConfirmModal: React.FC<RecordConfirmModalProps> = ({
   isOpen,
   onClose,
-  cardName,
+  cardName: _cardName,
   defaultAmount,
-  kind,
+  kind: _kind,
   onConfirm,
 }) => {
   const [amount, setAmount] = useState<string>('');

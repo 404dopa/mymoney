@@ -1,0 +1,137 @@
+.record-confirm-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Amount input wrapper */
+.amount-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.amount-step-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid #cbd5e1;
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-size: 1.6rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.amount-step-btn:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.amount-step-btn:active {
+  background-color: #e2e8f0;
+  transform: scale(0.96);
+}
+
+.amount-step-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.amount-large-input {
+  flex: 1;
+  font-size: 1.6rem !important;
+  font-weight: 800 !important;
+  padding: 0 12px !important;
+  color: var(--text-main);
+  height: 52px;
+  direction: ltr;
+  text-align: center !important;
+  -moz-appearance: textfield !important;
+  appearance: textfield !important;
+}
+
+.amount-large-input::-webkit-outer-spin-button,
+.amount-large-input::-webkit-inner-spin-button {
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+}
+
+/* الأزرار بجانب بعض (واحد بصف الثاني) */
+.confirm-modal-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+/* زر التأكيد: أبيض */
+.confirm-btn-white {
+  flex: 1;
+  height: 48px;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-family: var(--font-family) !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-btn-white:active {
+  background-color: #f1f5f9 !important;
+}
+
+.confirm-btn-white:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* زر الإلغاء: أحمر */
+.cancel-btn-red {
+  flex: 1;
+  height: 48px;
+  background-color: #ef4444 !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: var(--font-family) !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancel-btn-red:active {
+  background-color: #dc2626 !important;
+}
+
+.cancel-btn-red:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-error-alert {
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #dc2626;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.88rem;
+  font-weight: 600;
+}

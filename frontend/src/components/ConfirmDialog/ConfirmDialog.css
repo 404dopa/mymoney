@@ -1,0 +1,22 @@
+.confirm-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.confirm-dialog-message {
+  font-size: 1.15rem;
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+
+.confirm-dialog-actions button {
+  flex: 1;
+  font-family: var(--font-family) !important;
+}

@@ -1,0 +1,199 @@
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-label-required {
+  color: var(--color-danger);
+  margin-right: 4px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+.input-with-action {
+  display: flex;
+  gap: 8px;
+}
+
+.input-with-action select {
+  flex: 1;
+}
+
+.btn-inline-add {
+  min-height: var(--input-height);
+  padding: 0 16px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.form-error-alert {
+  background-color: #fff1f2;
+  border: 1.5px solid #fecdd3;
+  color: #b91c1c;
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.form-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 26px;
+}
+
+.form-actions button {
+  flex: 1;
+}
+
+/* زر الحفظ: أبيض */
+.btn-action-white {
+  height: 48px;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-family: var(--font-family) !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action-white:active {
+  background-color: #f1f5f9 !important;
+}
+
+.btn-action-white:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* زر الإلغاء: أحمر */
+.btn-action-red {
+  height: 48px;
+  background-color: #ef4444 !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: var(--font-family) !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-action-red:active {
+  background-color: #dc2626 !important;
+}
+
+.btn-action-red:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Small inline toggle button in labels */
+.btn-inline-toggle {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #0f172a;
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  user-select: none;
+  line-height: 1;
+  padding: 0;
+}
+
+.btn-inline-toggle:hover,
+.btn-inline-toggle:active {
+  background-color: #e2e8f0;
+}
+
+/* Stepper buttons for amount inputs */
+.amount-input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.amount-step-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid #cbd5e1;
+  background-color: #f8fafc;
+  color: #0f172a;
+  font-family: var(--font-family) !important;
+  font-size: 1.5rem;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.amount-step-btn:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+}
+
+.amount-step-btn:active {
+  background-color: #e2e8f0;
+  transform: scale(0.96);
+}
+
+.amount-step-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.amount-stepper-input {
+  flex: 1;
+  text-align: center !important;
+  font-weight: 800 !important;
+  font-size: 1.25rem !important;
+  direction: ltr;
+}
+
+

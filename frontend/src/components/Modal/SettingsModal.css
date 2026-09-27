@@ -1,0 +1,107 @@
+.settings-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.day-input-row {
+  display: flex;
+  align-items: center;
+}
+
+.day-number-input {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  text-align: center !important;
+  height: 52px !important;
+  color: var(--text-main);
+  background-color: var(--bg-card);
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  width: 100%;
+}
+
+/* صندوق المعاينة الحية */
+.preview-range-box {
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.preview-range-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.preview-range-dates {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  color: #0f172a;
+}
+
+.preview-range-dates strong {
+  color: #2563eb;
+  font-weight: 800;
+  margin-right: 4px;
+}
+
+/* أزرار الإجراءات */
+.settings-modal-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.settings-modal-actions button {
+  flex: 1;
+}
+
+.settings-modal-actions .confirm-btn-white {
+  height: 48px;
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  border: 1.5px solid #cbd5e1 !important;
+  font-family: var(--font-family) !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-modal-actions .confirm-btn-white:active {
+  background-color: #f1f5f9 !important;
+}
+
+.settings-modal-actions .cancel-btn-red {
+  height: 48px;
+  background-color: #ef4444 !important;
+  color: #ffffff !important;
+  border: none !important;
+  font-family: var(--font-family) !important;
+  font-weight: 800 !important;
+  font-size: 1.05rem !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.25) !important;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-modal-actions .cancel-btn-red:active {
+  background-color: #dc2626 !important;
+}
+

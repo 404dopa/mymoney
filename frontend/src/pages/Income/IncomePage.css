@@ -1,0 +1,14 @@
+/* Income page shares structure with Expenses page */
+.income-page {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Override notification color for income (green) */
+.income-notification-banner {
+  background-color: #ecfdf5;
+  border-color: #a7f3d0;
+  color: #047857;
+}
+
+/* Reuse same card grid, error banner, loading styles from ExpensesPage */

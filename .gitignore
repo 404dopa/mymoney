@@ -1,0 +1,26 @@
+# Dependencies
+**/node_modules/
+
+# Production builds
+**/dist/
+**/build/
+
+# Local databases
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+
+# Binaries
+server
+server.exe
+*.exe
+
+# Environment variables
+.env
+.env.local
+
+# IDEs & System files
+.DS_Store
+.vscode/
+.idea/

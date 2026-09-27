@@ -1,0 +1,142 @@
+.summary-card {
+  background-color: var(--bg-surface);
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  min-height: 76px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (max-width: 480px) {
+  .summary-card {
+    padding: 10px 8px;
+    border-radius: 13px;
+    min-height: 70px;
+    gap: 4px;
+  }
+}
+
+.summary-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.summary-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+.summary-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+@media (max-width: 480px) {
+  .summary-title {
+    font-size: 0.72rem;
+  }
+  .summary-card-icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.summary-amount {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 480px) {
+  .summary-amount {
+    font-size: 1rem;
+    font-weight: 800;
+  }
+}
+
+/* Income Variant: Soft Emerald */
+.summary-income {
+  background-color: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.summary-income .summary-card-icon {
+  background-color: #dcfce7;
+  color: #16a34a;
+}
+
+.summary-income .summary-title {
+  color: #166534;
+}
+
+.summary-income .summary-amount {
+  color: #15803d;
+}
+
+/* Expense Variant: Soft Rose */
+.summary-expense {
+  background-color: #fff1f2;
+  border-color: #fecdd3;
+}
+
+.summary-expense .summary-card-icon {
+  background-color: #ffe4e6;
+  color: #e11d48;
+}
+
+.summary-expense .summary-title {
+  color: #9f1239;
+}
+
+.summary-expense .summary-amount {
+  color: #be123c;
+}
+
+/* Balance Variant: Clean White Card */
+.summary-balance {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.summary-balance .summary-card-icon {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+.summary-balance .summary-title {
+  color: #64748b;
+}
+
+.summary-balance .summary-amount {
+  color: #0f172a;
+}
+
+.amount-negative {
+  color: #e11d48 !important;
+}
+
+.summary-subtitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}

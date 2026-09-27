@@ -1,0 +1,275 @@
+.statistics-page {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.stats-filters-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 12px 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.filter-label {
+  font-weight: 800;
+  color: var(--text-main);
+  white-space: nowrap;
+  font-size: 0.95rem;
+  min-width: 28px;
+}
+
+.date-selectors-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.selector-pipe {
+  color: #94a3b8;
+  font-weight: 300;
+  font-size: 1.15rem;
+  line-height: 1;
+  user-select: none;
+}
+
+.filter-line-divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--border-subtle);
+}
+
+.filter-select {
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-color);
+  background-color: var(--bg-card);
+  color: var(--text-main);
+  font-weight: 700;
+  font-size: 0.9rem;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 8px center;
+  background-size: 14px;
+  padding-left: 28px;
+  padding-right: 12px;
+  text-align: right;
+}
+
+.filter-select:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.year-select {
+  min-width: 92px;
+}
+
+.month-select {
+  min-width: 100px;
+}
+
+.day-select {
+  min-width: 90px;
+}
+
+.summary-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+@media (max-width: 640px) {
+  .stats-filters-bar {
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .filter-select {
+    padding-left: 24px;
+    padding-right: 8px;
+    background-position: left 6px center;
+    background-size: 12px;
+    font-size: 0.84rem;
+  }
+
+  .year-select {
+    min-width: 80px;
+  }
+
+  .month-select {
+    min-width: 88px;
+  }
+
+  .day-select {
+    min-width: 78px;
+  }
+
+  .summary-cards-grid {
+    gap: 8px;
+  }
+}
+
+.categories-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-items-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.category-card {
+  background-color: var(--bg-surface);
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  box-shadow: var(--shadow-sm);
+}
+
+.category-card:hover {
+  background-color: var(--bg-app);
+  border-color: var(--border-strong);
+}
+
+.category-card:focus-visible {
+  outline: 3px solid var(--border-focus);
+}
+
+.cat-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cat-total {
+  font-size: 1.05rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.cat-total-expense {
+  color: #e11d48;
+}
+
+.cat-total-income {
+  color: #059669;
+}
+
+.empty-state-box {
+  background-color: var(--bg-surface);
+  border: 1.5px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* Category Transactions Drill-down list inside Modal */
+.drilldown-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.drilldown-header {
+  background-color: #f8fafc;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drilldown-header-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.drilldown-total {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.drilldown-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.drilldown-item-card {
+  background-color: #ffffff;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.drilldown-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drilldown-item-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.drilldown-item-date {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.drilldown-item-amount {
+  font-size: 1.25rem;
+  font-weight: 800;
+}

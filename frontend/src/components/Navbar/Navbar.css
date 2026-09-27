@@ -1,0 +1,241 @@
+/* ========================================================
+   App Top Header - Gray Theme Style
+   ======================================================== */
+
+.app-top-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 64px;
+  background-color: #1e2430;
+  border-bottom: 1px solid #2e3547;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  z-index: 900;
+}
+
+.top-header-inner {
+  max-width: var(--content-max-width);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  box-sizing: border-box;
+}
+
+.header-action-slot {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 84px;
+  height: 40px;
+  flex-shrink: 0;
+}
+
+.header-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Pencil Button (Toggle Card Edit Mode) */
+.header-pencil-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  box-shadow: none !important;
+  border-radius: 10px;
+}
+
+.header-pencil-btn.pencil-active {
+  background-color: rgba(96, 165, 250, 0.22) !important;
+  color: #60a5fa !important;
+  box-shadow: 0 0 0 1px rgba(96, 165, 250, 0.4) !important;
+}
+
+.header-pencil-btn:hover,
+.header-pencil-btn:focus,
+.header-pencil-btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+/* Add Card Button (Transparent Background, Pure White '+') */
+.header-add-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+  box-shadow: none !important;
+}
+
+.header-add-card-btn:hover,
+.header-add-card-btn:focus,
+.header-add-card-btn:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+
+
+
+
+/* ========================================================
+   Floating Bottom Navigation Pill (White Style)
+   ======================================================== */
+
+.floating-nav-wrapper {
+  position: fixed;
+  bottom: 22px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1500;
+  pointer-events: none;
+}
+
+.floating-nav-pill {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: var(--radius-pill);
+  padding: 6px 10px;
+  gap: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  user-select: none;
+  width: auto;
+  min-width: 300px;
+  justify-content: space-between;
+}
+
+/* Side navigation buttons (المصاريف / الإيرادات) */
+.nav-pill-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 95px;
+  height: 52px;
+  padding: 4px 16px;
+  border-radius: var(--radius-pill);
+  color: #64748b;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.nav-pill-btn:hover {
+  color: #0f172a;
+  background-color: #f1f5f9;
+}
+
+.nav-pill-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.nav-pill-text {
+  font-size: 0.85rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Active State for side buttons */
+.active-expense {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid #0f172a;
+}
+
+.active-income {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border: 1px solid #0f172a;
+}
+
+/* Center Circular Button for Statistics (الدائرة بالوسط) */
+.nav-pill-center-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2px solid #cbd5e1;
+  color: #334155;
+  cursor: pointer;
+  text-decoration: none;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin: 0 4px;
+  transition: all 0.2s ease;
+}
+
+.nav-pill-center-circle:hover {
+  background-color: #f8fafc;
+  color: #0f172a;
+  border-color: #94a3b8;
+}
+
+.circle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.active-stats-circle {
+  background-color: #0f172a !important;
+  color: #ffffff !important;
+  border-color: #2563eb !important;
+}

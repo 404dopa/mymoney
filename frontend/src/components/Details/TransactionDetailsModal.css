@@ -1,0 +1,116 @@
+.details-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.details-amount-banner {
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  text-align: center;
+  border: 1.5px solid var(--border-subtle);
+}
+
+.banner-expense {
+  background-color: var(--color-expense-bg);
+  border-color: var(--color-expense-border);
+}
+
+.banner-expense .details-banner-val {
+  color: #e11d48;
+}
+
+.banner-income {
+  background-color: var(--color-income-bg);
+  border-color: var(--color-income-border);
+}
+
+.banner-income .details-banner-val {
+  color: #059669;
+}
+
+.details-banner-label {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.details-banner-val {
+  font-size: 2.3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: #f8fafc;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 18px 20px;
+}
+
+.details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 1rem;
+}
+
+.details-row:last-child {
+  border-bottom: none;
+}
+
+.details-key {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.details-value {
+  color: var(--text-main);
+  text-align: left;
+}
+
+.type-badge {
+  background-color: #ffffff;
+  border: 1px solid var(--border-strong);
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.note-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.note-text {
+  background-color: #ffffff;
+  border: 1px solid var(--border-subtle);
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  width: 100%;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.details-actions {
+  display: flex;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.details-actions button {
+  flex: 1;
+}

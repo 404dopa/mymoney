@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap');
+
+/* ========================================================
+   Money Track - Figma Money App Design System
+   Modern Clean Fintech | Electric Royal Blue | Soft Shadows | Pill Curves
+   ======================================================== */
+
+:root {
+  /* Color Palette - Figma Inspired Light Fintech */
+  --bg-app: #f2f4f8;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-hover: #f8fafc;
+  --bg-input: #f8fafc;
+  --bg-header: linear-gradient(135deg, #1e3bf0 0%, #304ef8 100%);
+
+  /* Borders */
+  --border-subtle: #edf2f7;
+  --border-strong: #e2e8f0;
+  --border-focus: #2441f7;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 10px 25px -4px rgba(36, 65, 247, 0.07), 0 4px 10px -2px rgba(0, 0, 0, 0.03);
+  --shadow-lg: 0 18px 36px -4px rgba(36, 65, 247, 0.12), 0 6px 14px -2px rgba(0, 0, 0, 0.04);
+  --shadow-pill: 0 16px 38px rgba(36, 65, 247, 0.15), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 8px 24px rgba(36, 65, 247, 0.35);
+
+  /* Text Colors */
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-inverse: #ffffff;
+
+  /* Semantic Action Colors */
+  --color-primary: #2441f7;
+  --color-primary-hover: #1b34d8;
+  --color-primary-active: #152bb5;
+  --color-primary-bg: #eef2ff;
+  --color-primary-gradient: linear-gradient(135deg, #1e3bf0 0%, #3a5afc 100%);
+  --color-accent-gradient: linear-gradient(135deg, #00d2ff 0%, #8b5cf6 50%, #ec4899 100%);
+
+  --color-expense: #ef4444;
+  --color-expense-hover: #dc2626;
+  --color-expense-bg: #fff1f2;
+  --color-expense-border: #fecdd3;
+
+  --color-income: #10b981;
+  --color-income-hover: #059669;
+  --color-income-bg: #ecfdf5;
+  --color-income-border: #a7f3d0;
+
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-danger-bg: #fff1f2;
+
+  --color-warning: #f59e0b;
+
+  /* Sizing & Curves (Generous Figma Pill Curves) */
+  --btn-min-height: 48px;
+  --btn-large-height: 52px;
+  --input-height: 50px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  /* Layout */
+  --sidebar-width: 260px;
+  --header-height: 70px;
+  --content-max-width: 1050px;
+
+  /* Font */
+  --font-family: 'Cairo', 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* CSS Reset & Global Rules */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  transition: none !important;
+  animation: none !important;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-family) !important;
+  direction: rtl;
+  text-align: right;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  line-height: 1.5;
+  font-family: var(--font-family) !important;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-family) !important;
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-main);
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+h1 {
+  font-size: 1.875rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.25rem;
+}
+
+p {
+  color: var(--text-secondary);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Form Inputs, Buttons & Selects */
+button,
+input,
+select,
+textarea,
+optgroup,
+option,
+.btn,
+.confirm-btn-white,
+.cancel-btn-red,
+.btn-action-white,
+.btn-action-red,
+.amount-step-btn {
+  font-family: var(--font-family) !important;
+}
+
+input, select, textarea {
+  font-family: var(--font-family) !important;
+  font-size: 1rem;
+  background-color: var(--bg-input);
+  color: var(--text-main);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  min-height: var(--input-height);
+  width: 100%;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--border-focus);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(36, 65, 247, 0.12);
+}
+
+input::placeholder, textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Hide number input spinners */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: left 16px center;
+  background-size: 18px;
+  padding-left: 44px;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+/* Main Layout Styles */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 20px 16px 120px 16px;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding: 14px 10px 115px 10px;
+  }
+}

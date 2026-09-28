@@ -3,6 +3,9 @@ import { Expense, Income, StatisticsSummary } from '../types';
 import { statisticsApi } from '../services/api';
 import { getDaysInMonth } from '../utils/date';
 
+let cachedSummary: StatisticsSummary | null = null;
+let cachedRangeKey = '';
+
 export function useStatistics(initialStartDate?: string, initialEndDate?: string) {
   // Initialize with current month range by default
   const [startDate, setStartDate] = useState<string>(() => {
@@ -22,8 +25,13 @@ export function useStatistics(initialStartDate?: string, initialEndDate?: string
     return `${y}-${String(m).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
   });
 
-  const [summary, setSummary] = useState<StatisticsSummary | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const currentRangeKey = `${startDate}_${endDate}`;
+  const [summary, setSummary] = useState<StatisticsSummary | null>(() => {
+    return cachedRangeKey === currentRangeKey ? cachedSummary : null;
+  });
+  const [loading, setLoading] = useState<boolean>(() => {
+    return !(cachedRangeKey === currentRangeKey && cachedSummary !== null);
+  });
   const [error, setError] = useState<string | null>(null);
 
   // Category drill-down state
@@ -36,9 +44,12 @@ export function useStatistics(initialStartDate?: string, initialEndDate?: string
     loading: boolean;
   } | null>(null);
 
-  const fetchStats = useCallback(async () => {
+  const fetchStats = useCallback(async (isBackground: boolean | unknown = false) => {
+    const bg = isBackground === true;
     try {
-      setLoading(true);
+      if (!bg && !cachedSummary) {
+        setLoading(true);
+      }
       setError(null);
       const params: {
         start_date?: string;
@@ -49,6 +60,8 @@ export function useStatistics(initialStartDate?: string, initialEndDate?: string
       if (endDate) params.end_date = endDate;
 
       const data = await statisticsApi.getSummary(params);
+      cachedSummary = data;
+      cachedRangeKey = `${startDate}_${endDate}`;
       setSummary(data);
     } catch (err: unknown) {
       if (err instanceof Error) {
@@ -109,8 +122,8 @@ export function useStatistics(initialStartDate?: string, initialEndDate?: string
   };
 
   useEffect(() => {
-    fetchStats();
-  }, [fetchStats]);
+    fetchStats(cachedSummary !== null && cachedRangeKey === `${startDate}_${endDate}`);
+  }, [fetchStats, startDate, endDate]);
 
   return {
     summary,

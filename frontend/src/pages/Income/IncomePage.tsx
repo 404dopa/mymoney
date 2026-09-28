@@ -78,7 +78,7 @@ export const IncomePage: React.FC = () => {
   const isModalVisible = isAddModalOpen || !!editingCard;
 
   return (
-    <div className="income-page">
+    <div className="income-page page-fade-in">
       {/* Success Notification Alert */}
       {successNotification && (
         <div className="action-notification-banner income-notification-banner">
@@ -100,7 +100,7 @@ export const IncomePage: React.FC = () => {
       {error && (
         <div className="page-error-banner">
           <span>{error}</span>
-          <Button variant="secondary" size="normal" onClick={fetchCards}>
+          <Button variant="secondary" size="normal" onClick={() => fetchCards(false)}>
             إعادة المحاولة
           </Button>
         </div>

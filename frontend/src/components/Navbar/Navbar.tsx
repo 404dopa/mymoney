@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useLocation, Link } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useCardModal } from '../../context/CardModalContext';
 import { IconExpense, IconIncome, IconStats, IconPlus, IconEdit } from '../Icons/Icons';
 import './Navbar.css';
@@ -7,20 +7,33 @@ import './Navbar.css';
 export const Navbar: React.FC = () => {
   const { openAddModal, isCardEditMode, toggleCardEditMode } = useCardModal();
   const location = useLocation();
+  const navigate = useNavigate();
 
+  const isExpenses = location.pathname === '/expenses' || location.pathname === '/';
   const isIncome = location.pathname === '/income';
   const isStats = location.pathname === '/statistics';
   const addBtnLabel = isIncome ? 'إضافة بطاقة إيراد' : 'إضافة بطاقة مصروف';
   const editToggleLabel = isCardEditMode ? 'إلغاء وضع التعديل' : 'تعديل أو حذف البطاقات';
+
+  const handleNavigate = (path: string) => {
+    if (location.pathname !== path) {
+      navigate(path);
+    }
+  };
 
   return (
     <>
       {/* Top Header: Brand & Action Buttons */}
       <header className="app-top-header">
         <div className="top-header-inner">
-          <Link to="/expenses" className="header-brand" aria-label="Money Track - المصاريف">
+          <button
+            type="button"
+            onClick={() => handleNavigate('/expenses')}
+            className="header-brand-btn"
+            aria-label="Money Track - المصاريف"
+          >
             <span className="brand-title">Money Track</span>
-          </Link>
+          </button>
 
           <div className="header-action-slot">
             {!isStats && (
@@ -52,50 +65,47 @@ export const Navbar: React.FC = () => {
         </div>
       </header>
 
-
-
       {/* Floating Bottom Navigation Pill (الزر الأيمن: مصاريف | الوسط: إحصائيات | الزر الأيسر: إيرادات) */}
       <div className="floating-nav-wrapper">
         <nav className="floating-nav-pill" aria-label="شريط التنقل السريع">
           {/* الزر الأيمن في RTL: المصاريف */}
-          <NavLink
-            to="/expenses"
-            className={({ isActive }) =>
-              `nav-pill-btn pill-btn-right ${isActive ? 'active-expense' : ''}`
-            }
+          <button
+            type="button"
+            onClick={() => handleNavigate('/expenses')}
+            className={`nav-pill-btn pill-btn-right ${isExpenses ? 'active-expense' : ''}`}
+            aria-label="المصاريف"
           >
             <span className="nav-pill-icon">
               <IconExpense size={22} />
             </span>
             <span className="nav-pill-text">المصاريف</span>
-          </NavLink>
+          </button>
 
           {/* الوسط: الدائرة المخصصة للإحصائيات */}
-          <NavLink
-            to="/statistics"
-            className={({ isActive }) =>
-              `nav-pill-center-circle ${isActive ? 'active-stats-circle' : ''}`
-            }
+          <button
+            type="button"
+            onClick={() => handleNavigate('/statistics')}
+            className={`nav-pill-center-circle ${isStats ? 'active-stats-circle' : ''}`}
             title="الإحصائيات"
             aria-label="الإحصائيات"
           >
             <span className="circle-icon">
               <IconStats size={24} />
             </span>
-          </NavLink>
+          </button>
 
           {/* الزر الأيسر في RTL: الإيرادات */}
-          <NavLink
-            to="/income"
-            className={({ isActive }) =>
-              `nav-pill-btn pill-btn-left ${isActive ? 'active-income' : ''}`
-            }
+          <button
+            type="button"
+            onClick={() => handleNavigate('/income')}
+            className={`nav-pill-btn pill-btn-left ${isIncome ? 'active-income' : ''}`}
+            aria-label="الإيرادات"
           >
             <span className="nav-pill-icon">
               <IconIncome size={22} />
             </span>
             <span className="nav-pill-text">الإيرادات</span>
-          </NavLink>
+          </button>
         </nav>
       </div>
     </>

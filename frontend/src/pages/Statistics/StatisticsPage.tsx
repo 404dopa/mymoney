@@ -86,12 +86,12 @@ export const StatisticsPage: React.FC = () => {
   } | null>(null);
 
   return (
-    <div className="statistics-page">
+    <div className="statistics-page page-fade-in">
       {/* Error Alert */}
       {error && (
         <div className="page-error-banner">
           <span>{error}</span>
-          <Button variant="secondary" size="normal" onClick={fetchStats}>
+          <Button variant="secondary" size="normal" onClick={() => fetchStats(false)}>
             إعادة المحاولة
           </Button>
         </div>

@@ -2,17 +2,24 @@ import { useState, useEffect, useCallback } from 'react';
 import { CardFormData, IncomeCard } from '../types';
 import { incomeCardApi, incomeApi } from '../services/api';
 
+let cachedIncomeCards: IncomeCard[] | null = null;
+
 export function useIncomeCards() {
-  const [cards, setCards] = useState<IncomeCard[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [cards, setCards] = useState<IncomeCard[]>(() => cachedIncomeCards || []);
+  const [loading, setLoading] = useState<boolean>(() => cachedIncomeCards === null);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchCards = useCallback(async () => {
+  const fetchCards = useCallback(async (isBackground: boolean | unknown = false) => {
+    const bg = isBackground === true;
     try {
-      setLoading(true);
+      if (!bg && !cachedIncomeCards) {
+        setLoading(true);
+      }
       setError(null);
       const data = await incomeCardApi.getAll();
-      setCards(data || []);
+      const safeData = data || [];
+      cachedIncomeCards = safeData;
+      setCards(safeData);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -26,19 +33,19 @@ export function useIncomeCards() {
 
   const createCard = async (data: CardFormData): Promise<IncomeCard> => {
     const created = await incomeCardApi.create(data);
-    await fetchCards();
+    await fetchCards(false);
     return created;
   };
 
   const updateCard = async (id: number, data: CardFormData): Promise<IncomeCard> => {
     const updated = await incomeCardApi.update(id, data);
-    await fetchCards();
+    await fetchCards(false);
     return updated;
   };
 
   const deleteCard = async (id: number): Promise<void> => {
     await incomeCardApi.delete(id);
-    await fetchCards();
+    await fetchCards(false);
   };
 
   const recordFromCard = async (id: number) => {
@@ -57,7 +64,7 @@ export function useIncomeCards() {
   };
 
   useEffect(() => {
-    fetchCards();
+    fetchCards(cachedIncomeCards !== null);
   }, [fetchCards]);
 
   return {

@@ -273,3 +273,30 @@
   font-size: 1.25rem;
   font-weight: 800;
 }
+
+/* Success Toast Notification */
+.action-notification-banner {
+  background-color: #ecfdf5;
+  border: 1.5px solid #a7f3d0;
+  color: #047857;
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.05rem;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.12);
+}
+
+.notification-close-btn {
+  background: transparent;
+  border: none;
+  color: #047857;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0 4px;
+  display: flex;
+  align-items: center;
+}

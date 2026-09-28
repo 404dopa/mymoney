@@ -121,6 +121,37 @@ export function useStatistics(initialStartDate?: string, initialEndDate?: string
     setDrillDownCategory(null);
   };
 
+  const refreshCurrentCategoryDetails = async () => {
+    if (!drillDownCategory) return;
+    try {
+      const filter = {
+        start_date: startDate,
+        end_date: endDate,
+      };
+
+      let items: (Expense | Income)[] = [];
+      if (drillDownCategory.kind === 'expense') {
+        items = await statisticsApi.getExpenseTransactionsByCategory(drillDownCategory.id, filter);
+      } else {
+        items = await statisticsApi.getIncomeTransactionsByCategory(drillDownCategory.id, filter);
+      }
+
+      const newTotal = items.reduce((sum, item) => sum + Number(item.amount), 0);
+      setDrillDownCategory((prev) =>
+        prev
+          ? {
+              ...prev,
+              items,
+              total: newTotal,
+              loading: false,
+            }
+          : null
+      );
+    } catch {
+      // silently keep previous state on refresh error
+    }
+  };
+
   useEffect(() => {
     fetchStats(cachedSummary !== null && cachedRangeKey === `${startDate}_${endDate}`);
   }, [fetchStats, startDate, endDate]);
@@ -137,5 +168,6 @@ export function useStatistics(initialStartDate?: string, initialEndDate?: string
     drillDownCategory,
     openCategoryDetails,
     closeCategoryDetails,
+    refreshCurrentCategoryDetails,
   };
 }

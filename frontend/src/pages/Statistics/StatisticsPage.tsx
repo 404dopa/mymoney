@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useStatistics } from '../../hooks/useStatistics';
+import { useExpenseTypes } from '../../hooks/useExpenseTypes';
+import { useIncomeTypes } from '../../hooks/useIncomeTypes';
 import { SummaryCard } from '../../components/SummaryCard/SummaryCard';
 import { Modal } from '../../components/Modal/Modal';
 import { TransactionDetailsModal } from '../../components/Details/TransactionDetailsModal';
+import { ExpenseFormModal } from '../../components/Forms/ExpenseFormModal';
+import { IncomeFormModal } from '../../components/Forms/IncomeFormModal';
+import { ConfirmDialog } from '../../components/ConfirmDialog/ConfirmDialog';
 import { Button } from '../../components/Button/Button';
-import { IconExpense, IconIncome } from '../../components/Icons/Icons';
-import { Expense, Income } from '../../types';
+import { IconExpense, IconIncome, IconCheck, IconClose } from '../../components/Icons/Icons';
+import { Expense, Income, ExpenseFormData, IncomeFormData } from '../../types';
+import { expenseApi, incomeApi } from '../../services/api';
 import { formatMoney } from '../../utils/format';
 import { formatDisplayDate, getDaysInMonth } from '../../utils/date';
 import './StatisticsPage.css';
@@ -24,9 +29,11 @@ export const StatisticsPage: React.FC = () => {
     drillDownCategory,
     openCategoryDetails,
     closeCategoryDetails,
+    refreshCurrentCategoryDetails,
   } = useStatistics();
 
-  const navigate = useNavigate();
+  const { types: expenseTypes, createType: createExpenseType } = useExpenseTypes();
+  const { types: incomeTypes, createType: createIncomeType } = useIncomeTypes();
 
   // Extract from parts
   const fromParts = startDate.split('-');
@@ -85,8 +92,102 @@ export const StatisticsPage: React.FC = () => {
     kind: 'expense' | 'income';
   } | null>(null);
 
+  // Edit states
+  const [editingExpense, setEditingExpense] = useState<Expense | null>(null);
+  const [editingIncome, setEditingIncome] = useState<Income | null>(null);
+
+  // Delete state
+  const [deletingTx, setDeletingTx] = useState<{
+    tx: Expense | Income;
+    kind: 'expense' | 'income';
+  } | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Notification state
+  const [successNotification, setSuccessNotification] = useState<string | null>(null);
+
+  const handleEditFromDetails = (tx: Expense | Income, kind: 'expense' | 'income') => {
+    setSelectedTxForDetails(null);
+    if (kind === 'expense') {
+      setEditingExpense(tx as Expense);
+    } else {
+      setEditingIncome(tx as Income);
+    }
+  };
+
+  const handleDeleteFromDetails = (tx: Expense | Income, kind: 'expense' | 'income') => {
+    setSelectedTxForDetails(null);
+    setDeletingTx({ tx, kind });
+  };
+
+  const handleConfirmDelete = async () => {
+    if (!deletingTx) return;
+    try {
+      setIsDeleting(true);
+      if (deletingTx.kind === 'expense') {
+        await expenseApi.delete(deletingTx.tx.id);
+      } else {
+        await incomeApi.delete(deletingTx.tx.id);
+      }
+      await refreshCurrentCategoryDetails();
+      await fetchStats(false);
+      setSuccessNotification(`تم حذف معاملة "${deletingTx.tx.name}" بنجاح!`);
+      setTimeout(() => setSuccessNotification(null), 3500);
+      setDeletingTx(null);
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'فشل في حذف المعاملة');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const handleExpenseSubmit = async (data: ExpenseFormData) => {
+    if (!editingExpense) return;
+    try {
+      await expenseApi.update(editingExpense.id, data);
+      await refreshCurrentCategoryDetails();
+      await fetchStats(false);
+      setSuccessNotification(`تم تعديل مصروف "${data.name}" بنجاح!`);
+      setTimeout(() => setSuccessNotification(null), 3500);
+      setEditingExpense(null);
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'فشل في تعديل المصروف');
+    }
+  };
+
+  const handleIncomeSubmit = async (data: IncomeFormData) => {
+    if (!editingIncome) return;
+    try {
+      await incomeApi.update(editingIncome.id, data);
+      await refreshCurrentCategoryDetails();
+      await fetchStats(false);
+      setSuccessNotification(`تم تعديل إيراد "${data.name}" بنجاح!`);
+      setTimeout(() => setSuccessNotification(null), 3500);
+      setEditingIncome(null);
+    } catch (err: unknown) {
+      alert(err instanceof Error ? err.message : 'فشل في تعديل الإيراد');
+    }
+  };
+
   return (
     <div className="statistics-page page-fade-in">
+      {/* Success Notification Alert */}
+      {successNotification && (
+        <div className="action-notification-banner">
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+            <IconCheck size={18} />
+            {successNotification}
+          </span>
+          <button
+            className="notification-close-btn"
+            onClick={() => setSuccessNotification(null)}
+            aria-label="إغلاق الإشعار"
+          >
+            <IconClose size={16} />
+          </button>
+        </div>
+      )}
+
       {/* Error Alert */}
       {error && (
         <div className="page-error-banner">
@@ -403,14 +504,44 @@ export const StatisticsPage: React.FC = () => {
         onClose={() => setSelectedTxForDetails(null)}
         transaction={selectedTxForDetails?.tx || null}
         kind={selectedTxForDetails?.kind || 'expense'}
-        onEdit={() => {
-          const targetPage = selectedTxForDetails?.kind === 'expense' ? '/expenses' : '/income';
-          setSelectedTxForDetails(null);
-          navigate(targetPage);
-        }}
-        onDelete={() => {
-          setSelectedTxForDetails(null);
-        }}
+        onEdit={(tx) =>
+          handleEditFromDetails(tx, selectedTxForDetails?.kind || 'expense')
+        }
+        onDelete={(tx) =>
+          handleDeleteFromDetails(tx, selectedTxForDetails?.kind || 'expense')
+        }
+      />
+
+      {/* Edit Expense Modal */}
+      <ExpenseFormModal
+        isOpen={!!editingExpense}
+        onClose={() => setEditingExpense(null)}
+        onSubmit={handleExpenseSubmit}
+        expenseTypes={expenseTypes}
+        onCreateType={createExpenseType}
+        initialData={editingExpense}
+      />
+
+      {/* Edit Income Modal */}
+      <IncomeFormModal
+        isOpen={!!editingIncome}
+        onClose={() => setEditingIncome(null)}
+        onSubmit={handleIncomeSubmit}
+        incomeTypes={incomeTypes}
+        onCreateType={createIncomeType}
+        initialData={editingIncome}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <ConfirmDialog
+        isOpen={!!deletingTx}
+        title={deletingTx?.kind === 'expense' ? 'تأكيد حذف المصروف' : 'تأكيد حذف الإيراد'}
+        message={`هل أنت متأكد من حذف معاملة "${deletingTx?.tx.name}" بمبلغ ${formatMoney(deletingTx?.tx.amount || 0)}؟`}
+        confirmLabel="حذف المعاملة"
+        cancelLabel="إلغاء"
+        isLoading={isDeleting}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => setDeletingTx(null)}
       />
     </div>
   );
